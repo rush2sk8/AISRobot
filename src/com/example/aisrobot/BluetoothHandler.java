@@ -182,6 +182,7 @@ public class BluetoothHandler extends Activity {
 			byte[] msgBuffer = message.getBytes();
 
 			try {
+				if(mmOutStream!=null)
 				mmOutStream.write(msgBuffer);
 
 			} catch (IOException e) {
