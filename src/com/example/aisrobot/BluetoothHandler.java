@@ -83,7 +83,7 @@ public class BluetoothHandler extends Activity {
 
 		// Create a data stream so we can talk to server.
 		Log.d(TAG, "...Create Socket...");
-
+		
 		mConnectedThread = new ConnectedThread(btSocket);
 		mConnectedThread.start();
 
@@ -118,15 +118,14 @@ public class BluetoothHandler extends Activity {
 	}
 
 	private void checkBTState() {
-		// Check for Bluetooth support and then check to make sure it is turned on
-		// Emulator doesn't support Bluetooth and will return null
+
 		if(btAdapter==null) { 
 			errorExit("Fatal Error", "Bluetooth not support");
 		} else {
 			if (btAdapter.isEnabled()) {
 				Log.d(TAG, "...Bluetooth ON...");
 			} else {
-				//Prompt user to turn on Bluetooth
+				
 				Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 				startActivityForResult(enableBtIntent, 1);
 			}
@@ -138,7 +137,7 @@ public class BluetoothHandler extends Activity {
 		finish();
 	}
 
-	//bluetooth stuff to connect to arduino
+
 	private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
 		if(Build.VERSION.SDK_INT >= 10){
 			try {
@@ -159,8 +158,7 @@ public class BluetoothHandler extends Activity {
 			InputStream tmpIn = null;
 			OutputStream tmpOut = null;
 
-			// Get the input and output streams, using temp objects because
-			// member streams are final
+			
 			try {
 				tmpIn = socket.getInputStream();
 				tmpOut = socket.getOutputStream();
@@ -178,8 +176,8 @@ public class BluetoothHandler extends Activity {
 			while (true) {
 				try {
 					// Read from the InputStream
-					bytes = mmInStream.read(buffer);		// Get number of bytes and message in "buffer"
-					h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();		// Send to message queue Handler
+					bytes = mmInStream.read(buffer);	
+					h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();		
 				} catch (IOException e) {
 					break;
 				}
