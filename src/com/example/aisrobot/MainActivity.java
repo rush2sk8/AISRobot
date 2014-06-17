@@ -144,34 +144,39 @@ public class MainActivity extends Activity {
 	}
 
 	private void executeActions() {
+		if(btHandler.isSocketAvailable()) {
+			for(String item:stack) {
 
-		for(String item:stack) {
+				String code = "1";
 
-			String code = "1";
+				if(item.equals("Forwards")) {
+					code = "3";
+				}else if(item.equals("Backwards")) {
+					code = "2";
+				}else if(item.equals("Left")) {
+					code = "5";
+				}else if(item.equals("Right")) {
+					code = "4";
+				}
 
-			if(item.equals("Forwards")) {
-				code = "3";
-			}else if(item.equals("Backwards")) {
-				code = "2";
-			}else if(item.equals("Left")) {
-				code = "5";
-			}else if(item.equals("Right")) {
-				code = "4";
+				btHandler.write(code);
+
+				try {
+					Thread.currentThread().sleep(1000);
+				} catch (InterruptedException e) {
+					Toast.makeText(getApplicationContext(), "Cant Sleep Now Killing Self", Toast.LENGTH_SHORT).show();
+					System.exit(-1);
+				}
 			}
 
-			btHandler.write(code);
+			//makes robot stop
+			btHandler.write("1");
+			//clears console after done
+			clear.performClick();
 
-			try {
-				Thread.currentThread().sleep(1000);
-			} catch (InterruptedException e) {
-				Toast.makeText(getApplicationContext(), "Cant Sleep Now Killing Self", Toast.LENGTH_SHORT).show();
-				System.exit(-1);
-			}
-		}
-
-		btHandler.write("1");
-		clear.performClick();
-		stack.clear();
+		}else
+			Toast.makeText(getApplicationContext(), "Not Connected", Toast.LENGTH_SHORT).show();
+	
 	}
 
 	protected void onDestroy() {

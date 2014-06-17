@@ -34,7 +34,12 @@ public class BluetoothHandler extends Activity {
 	private static String address;
 
 	public void write(String data) {
+
 		mConnectedThread.write(data);
+	
+	}
+	public boolean isSocketAvailable() {
+		return btSocket.isConnected();
 	}
 
 	public BluetoothHandler(Context c, String ad) {
@@ -80,7 +85,6 @@ public class BluetoothHandler extends Activity {
 		Log.d(TAG, "...Create Socket...");
 
 		mConnectedThread = new ConnectedThread(btSocket);
-		Toast.makeText(context, "Connected!", Toast.LENGTH_LONG).show();
 		mConnectedThread.start();
 
 	}
