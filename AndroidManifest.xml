@@ -25,6 +25,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.aisrobot.ListActivity"
+            android:label="@string/title_activity_list" >
+        </activity>
+        <activity
+            android:name="com.example.aisrobot.ChooseDeviceToConnectTo"
+            android:label="@string/title_activity_choose_device_to_connect_to" >
+        </activity>
     </application>
 
 </manifest>

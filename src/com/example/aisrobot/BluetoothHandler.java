@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
@@ -28,19 +29,22 @@ public class BluetoothHandler extends Activity {
 	private BluetoothSocket btSocket = null;
 	private ConnectedThread mConnectedThread;
 	private final int RECIEVE_MESSAGE =1;
+	private Context context;
 
-	private static String address = "20:13:11:07:26:11";
+	private static String address;
 
-	 public void write(String data) {
-		 mConnectedThread.write(data);
-	 }
-	
-	public BluetoothHandler() {
+	public void write(String data) {
+		mConnectedThread.write(data);
+	}
 
-		btAdapter = BluetoothAdapter.getDefaultAdapter();		// get Bluetooth adapter
+	public BluetoothHandler(Context c, String ad) {
+		
+		address = ad;
+		btAdapter = BluetoothAdapter.getDefaultAdapter();	
+		context = c;// get Bluetooth adapter
 		checkBTState();
 		createHandler();
-		
+
 		Log.d(TAG, "...onResume - try connect...");
 
 		// Set up a pointer to the remote node using it's address.
@@ -64,6 +68,8 @@ public class BluetoothHandler extends Activity {
 			Log.d(TAG, "....Connection ok...");
 		} catch (IOException e) {
 			try {
+
+
 				btSocket.close();
 			} catch (IOException e2) {
 				errorExit("Fatal Error", "In onResume() and unable to close socket during connection failure" + e2.getMessage() + ".");
@@ -74,8 +80,9 @@ public class BluetoothHandler extends Activity {
 		Log.d(TAG, "...Create Socket...");
 
 		mConnectedThread = new ConnectedThread(btSocket);
+		Toast.makeText(context, "Connected!", Toast.LENGTH_LONG).show();
 		mConnectedThread.start();
-	
+
 	}
 
 	private void createHandler(){
@@ -183,7 +190,7 @@ public class BluetoothHandler extends Activity {
 
 			try {
 				if(mmOutStream!=null)
-				mmOutStream.write(msgBuffer);
+					mmOutStream.write(msgBuffer);
 
 			} catch (IOException e) {
 				Log.d(TAG, "...Error data send: " + e.getMessage() + "...");     
@@ -194,4 +201,5 @@ public class BluetoothHandler extends Activity {
 
 
 	}
+
 }

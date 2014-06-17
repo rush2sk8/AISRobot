@@ -3,7 +3,10 @@ package com.example.aisrobot;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,26 +16,28 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	private BluetoothHandler btHandler;
-	private Button forward,backward,right,left,stop,execute,clear;
+	public static BluetoothHandler btHandler;
+	private Button forward,backward,right,left,stop,execute,clear,recon;
 	private TextView console;
 	private ArrayList<String> stack;
+	private Context context;
+	public static String ad;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		context = getApplicationContext();
+		startActivity(new Intent(context, ChooseDeviceToConnectTo.class));
 		init();
 		handleListeners();
-		btHandler = new BluetoothHandler();
-
 
 
 	}
 
 	private void init() {
 		forward = (Button)findViewById(R.id.forward);
+		recon = (Button)findViewById(R.id.reconnect);
 		backward = (Button)findViewById(R.id.backward);
 		right = (Button)findViewById(R.id.right);
 		left = (Button)findViewById(R.id.left);
@@ -110,8 +115,20 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+
 				stack.clear();
 				updateConsole();
+
+			}
+		});
+
+		recon.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				btHandler = null;
+				startActivity(new Intent(context, ChooseDeviceToConnectTo.class));
+
 
 			}
 		});
@@ -153,8 +170,8 @@ public class MainActivity extends Activity {
 		}
 
 		btHandler.write("1");
-//		clear.performClick();
-//		stack.clear();
+		clear.performClick();
+		stack.clear();
 	}
 
 	protected void onDestroy() {

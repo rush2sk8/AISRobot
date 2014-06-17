@@ -3,5 +3,8 @@
 
     <string name="app_name">AIS Robot</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_choose_device_to_connect_to">ChooseDeviceToConnectTo</string>
 
 </resources>
