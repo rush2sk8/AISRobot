@@ -31,19 +31,43 @@ public class BluetoothHandler extends Activity {
 	private final int RECIEVE_MESSAGE =1;
 	private Context context;
 
+	
+	
+	
 	private static String address;
 
+	public void dispose() {
+		btAdapter = null;
+		try {
+			btSocket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		btSocket = null;
+		try {
+			mConnectedThread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mConnectedThread = null;
+	}
+	
+	
+	
 	public void write(String data) {
 
 		mConnectedThread.write(data);
-	
+
 	}
+
 	public boolean isSocketAvailable() {
 		return btSocket.isConnected();
 	}
 
 	public BluetoothHandler(Context c, String ad) {
-		
+
 		address = ad;
 		btAdapter = BluetoothAdapter.getDefaultAdapter();	
 		context = c;// get Bluetooth adapter
@@ -83,7 +107,7 @@ public class BluetoothHandler extends Activity {
 
 		// Create a data stream so we can talk to server.
 		Log.d(TAG, "...Create Socket...");
-		
+
 		mConnectedThread = new ConnectedThread(btSocket);
 		mConnectedThread.start();
 
@@ -125,7 +149,7 @@ public class BluetoothHandler extends Activity {
 			if (btAdapter.isEnabled()) {
 				Log.d(TAG, "...Bluetooth ON...");
 			} else {
-				
+
 				Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 				startActivityForResult(enableBtIntent, 1);
 			}
@@ -158,7 +182,7 @@ public class BluetoothHandler extends Activity {
 			InputStream tmpIn = null;
 			OutputStream tmpOut = null;
 
-			
+
 			try {
 				tmpIn = socket.getInputStream();
 				tmpOut = socket.getOutputStream();
@@ -204,4 +228,9 @@ public class BluetoothHandler extends Activity {
 
 	}
 
+
+	public void onBackPressed() {
+		//do nothing
+	}
+	
 }

@@ -1,6 +1,7 @@
 package com.example.aisrobot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,6 +35,11 @@ public class MainActivity extends Activity {
 
 
 	}
+	
+	@Override
+	public void onBackPressed() {
+	 //do nothing because it messes with the bt connection
+	}
 
 	private void init() {
 		forward = (Button)findViewById(R.id.forward);
@@ -56,7 +62,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				stack.add("Forwards");
 				updateConsole();
-
+ 
 			}
 		});
 
@@ -126,6 +132,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				btHandler.dispose();
 				btHandler = null;
 				startActivity(new Intent(context, ChooseDeviceToConnectTo.class));
 

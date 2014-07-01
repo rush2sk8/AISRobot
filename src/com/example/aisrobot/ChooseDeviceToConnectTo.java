@@ -22,6 +22,11 @@ import android.os.Build;
 public class ChooseDeviceToConnectTo extends Activity {
 
 	@Override
+	public void onBackPressed() {
+
+	}
+	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_choose_device_to_connect_to);
