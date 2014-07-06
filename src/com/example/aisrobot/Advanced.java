@@ -7,11 +7,10 @@ public class Advanced extends Activity {
 
 	private BluetoothHandler btHandler;
 
-	protected void onCreate(Bundle savedInstanceState, BluetoothHandler bth) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_advanced);
 
-		btHandler = bth;
 	}
 
 

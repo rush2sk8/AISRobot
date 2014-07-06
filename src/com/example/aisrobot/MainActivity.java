@@ -30,8 +30,6 @@ public class MainActivity extends Activity {
 		startActivity(new Intent(context, ChooseDeviceToConnectTo.class));
 		init();
 		handleListeners();
-
-
 	}
 	
 	@Override
