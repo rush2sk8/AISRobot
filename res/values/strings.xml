@@ -6,5 +6,6 @@
     <string name="title_activity_list">ListActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_choose_device_to_connect_to">ChooseDeviceToConnectTo</string>
+    <string name="title_activity_advanced">Advanced</string>
 
 </resources>

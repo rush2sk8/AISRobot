@@ -1,13 +1,11 @@
 package com.example.aisrobot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Looper;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,7 +16,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	public static BluetoothHandler btHandler;
-	private Button forward,backward,right,left,stop,execute,clear,recon;
+	private Button forward,backward,right,left,stop,execute,clear,recon,advanced;
 	private TextView console;
 	private ArrayList<String> stack;
 	private Context context;
@@ -53,6 +51,7 @@ public class MainActivity extends Activity {
 		console.setMovementMethod(new ScrollingMovementMethod());
 		clear = (Button)findViewById(R.id.clear);
 		stack = new ArrayList<String>();
+		advanced  = (Button)findViewById(R.id.advanced);
 	}
 
 	private void handleListeners() {
@@ -137,6 +136,14 @@ public class MainActivity extends Activity {
 				startActivity(new Intent(context, ChooseDeviceToConnectTo.class));
 
 
+			}
+		});
+		advanced.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(context,Advanced.class));
+				
 			}
 		});
 	}

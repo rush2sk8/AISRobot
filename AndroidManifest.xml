@@ -33,6 +33,10 @@
             android:name="com.example.aisrobot.ChooseDeviceToConnectTo"
             android:label="@string/title_activity_choose_device_to_connect_to" >
         </activity>
+        <activity
+            android:name="com.example.aisrobot.Advanced"
+            android:label="@string/title_activity_advanced" >
+        </activity>
     </application>
 
 </manifest>
