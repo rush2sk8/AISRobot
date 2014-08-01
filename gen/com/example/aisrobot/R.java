@@ -28,11 +28,11 @@ public final class R {
         public static final int action_settings=0x7f080013;
         public static final int advanced=0x7f080012;
         public static final int backward=0x7f08000a;
-        public static final int button1=0x7f080003;
         public static final int clear=0x7f080010;
         public static final int console=0x7f080005;
         public static final int container=0x7f080000;
         public static final int editText1=0x7f080002;
+        public static final int exec=0x7f080003;
         public static final int execute=0x7f080006;
         public static final int forward=0x7f080008;
         public static final int left=0x7f08000c;

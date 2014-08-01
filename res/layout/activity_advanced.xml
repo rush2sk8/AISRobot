@@ -14,26 +14,29 @@
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Commands: F- Forward , L - Left , R-Right ,\n B - Backwards , S- Stop" />
 
         <EditText
             android:id="@+id/editText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/button1"
+            android:layout_above="@+id/exec"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/textView1"
-            android:ems="10" >
+            android:ems="10"
+            android:hint="Example:\nCommand Time(Sec)\nF 2\nR .4\nB 3" >
 
             <requestFocus />
         </EditText>
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/exec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/editText1"
+            android:layout_centerHorizontal="true"
             android:text="Execute" />
 
     </RelativeLayout>
